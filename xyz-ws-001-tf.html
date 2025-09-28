@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO / Social -->
+  <title>Boulangerie Maison Janin — Votre boulangerie artisanale à [Ville]</title>
+  <meta name="description" content="Boulangerie Maison Janin — pains, viennoiseries et pâtisseries artisanales à [Ville]. Horaires, photos, avis clients et contact. Passez nous voir !" />
+  <link rel="canonical" href="https://example.com/" />
+  <meta name="keywords" content="boulangerie, pain, viennoiserie, pâtisserie, [Ville], artisan, horaires, contact" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Boulangerie Maison Janin — Toulouse" />
+  <meta property="og:description" content="Pains, viennoiseries et pâtisseries artisanales. Commandez ou venez déguster sur place." />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Boulangerie Le Pain Doré — [Ville]" />
+  <meta name="twitter:description" content="Pains, viennoiseries et pâtisseries artisanales. Horaires, avis, contact." />
+  <meta name="twitter:image" content="https://example.com/og-image.jpg" />
+
+  <!-- Google Font (modifiable) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fff;
+      --accent:#d99a3b; /* couleur miel / pain doré */
+      --muted:#6b6b6b;
+      --max-width:1100px;
+      --radius:10px;
+      --shadow: 0 6px 22px rgba(0,0,0,0.08);
+      color-scheme: light;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.5;
+    }
+
+/* Top bar + Hamburger */
+.topbar {
+  position: fixed;
+  top: 0; /* colle bien en haut */
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg); /* fond uni */
+  box-shadow: var(--shadow);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.hamburger{
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  background:var(--bg); /* il same as page background */
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,0.04);
+  cursor:pointer;
+}
+
+.brand .name{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:1rem;
+  color:#111; /* consistent with rest of page */
+}
+
+/* Responsive tweaks */
+@media (max-width:600px){
+  .container{padding:20px 12px 80px;}
+  header.hero{flex-direction:column;padding:20px 12px;}
+  .hero-right{width:100%;}
+  .gallery img{height:120px;}
+  .btn{flex:1;text-align:center;}
+  .site-nav{width:calc(100% - 24px);left:12px;right:12px;}
+}
+    
+    .hamburger .bars{
+      width:22px;height:2px;background:#222;box-shadow:0 6px 0 #222,0 -6px 0 #222;border-radius:2px;
+    }
+    .brand{
+      display:flex;flex-direction:column;gap:2px;padding-left:6px;
+    }
+    .brand .name{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;}
+    .brand .tag{font-size:0.75rem;color:var(--muted);}
+
+    /* Sidebar nav (hidden by default on mobile) */
+    nav.site-nav{
+      position:fixed;left:12px;top:72px;z-index:999;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(6px);
+      border-radius:12px;padding:10px;
+      box-shadow:var(--shadow);
+      max-width:240px;
+      display:none; /* toggled by JS */
+    }
+    nav.site-nav a{
+      display:block;padding:10px 12px;border-radius:8px;color:#111;text-decoration:none;font-weight:600;
+    }
+    nav.site-nav a:hover{background:rgba(217,154,59,0.08);}
+
+    /* Layout container */
+    .container {
+     max-width: var(--max-width);
+     margin: 0 auto;
+     padding: 60px 20px 90px;
+    }
+    
+    header.hero{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      padding:28px 12px;
+      border-radius:12px;
+      margin-top:20px;
+      background:linear-gradient(180deg,rgba(217,154,59,0.06),rgba(217,154,59,0.02));
+    }
+    .hero-left{flex:1;min-width:240px;}
+    .hero-right{width:300px;flex-shrink:0;}
+    .hero h1{margin:0;font-family:'Playfair Display',serif;font-size:2rem;}
+    .hero p.lead{color:var(--muted);margin:8px 0 16px;}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;
+      background:var(--accent);color:#fff;
+      box-shadow:0 6px 18px rgba(217,154,59,0.18);
+    }
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(217,154,59,0.15);box-shadow:none;}
+
+    /* Sections */
+    section{margin-top:28px;padding:22px;border-radius:12px;background:#fff;box-shadow:var(--shadow);}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .section-title h2{margin:0;font-size:1.1rem;font-weight:700;font-family:'Playfair Display',serif;}
+    .muted{color:var(--muted);font-size:0.95rem;}
+
+    /* Gallery */
+    .gallery{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;
+    }
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer;display:block;}
+
+    /* Simple card row for small info */
+    .info-row{display:flex;flex-wrap:wrap;gap:12px;}
+    .card{flex:1;min-width:180px;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(0,0,0,0.03);}
+
+    /* Hours table */
+    .hours{width:100%;border-collapse:collapse;}
+    .hours td{padding:6px 8px;border-bottom:1px dashed #f0f0f0;}
+
+    /* Reviews */
+    .review{padding:10px;border-radius:10px;background:#fff;border:1px solid rgba(0,0,0,0.04);}
+    .stars{color:var(--accent);font-weight:700;}
+
+    /* Contact form */
+    form.contact{display:grid;gap:8px;}
+    input,textarea,select{padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:0.95rem;}
+    textarea{min-height:120px;resize:vertical;}
+    .form-row{display:flex;gap:8px;}
+    .form-row > *{flex:1;}
+
+    /* Map */
+    .map{width:100%;height:300px;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);}
+
+    /* Footer */
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:0.95rem;margin-top:18px;}
+
+    /* Modal image viewer */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:2000;padding:20px;}
+    .modal img{max-width:95%;max-height:85%;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,0.6);}
+
+    /* Responsive tweaks */
+    @media (max-width:800px){
+      .hero{flex-direction:column;}
+      nav.site-nav{left:12px;right:12px;}
+      .hero-right{width:100%;}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Top left hamburger + brand ===== -->
+  <div class="topbar" aria-hidden="false">
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <span class="bars" aria-hidden="true"></span>
+    </button>
+    <div class="brand" aria-hidden="false">
+      <span class="name">Mon Commerce</span>
+      <span class="tag">Ma Spécialité — Toulouse</span>
+    </div>
+  </div>
+
+  <!-- Sidebar / nav -->
+  <nav class="site-nav" id="site-nav" aria-hidden="true">
+    <a href="#avis">Avis</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#photos">Photos</a>
+    <a href="#menu">Spécialités</a>
+    <a href="#carte">Nous trouver</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="container" id="top">
+    <!-- HERO -->
+    <header class="hero" role="banner" aria-label="Présentation">
+      <div class="hero-left">
+        <!--<h1>Autre Titre</h1>-->
+              <div class="hero-right">
+        <img src="images/MaisonJanin.jpg" alt="Vitrine" style="width:100%;border-radius:12px;height:200px;object-fit:cover;">
+      </div>
+        <p class="lead">Produits et services de qualité, conçus avec passion et savoir-faire — votre satisfaction au cœur de notre engagement depuis 1907.</p>
+        <!--<div class="cta-row">
+          <a class="btn" href="#carte">Nous trouver</a>
+          <a class="btn secondary" href="#contact">Commander / Contact</a>
+        </div>-->
+        <div style="margin-top:12px;" class="muted">
+         <!-- <strong>Tel:</strong> <a href="tel:+33123456789">01 23 45 67 89</a>--> <!-- • --> <strong>Email:</strong> <a href="mailto:contact@example.com">contact@example.com</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- REVIEWS -->
+    <section id="avis" aria-labelledby="avis-title">
+      <div class="section-title"><h2 id="avis-title">Avis clients</h2><span class="muted">Ce que disent nos clients</span></div>
+
+      <!-- Aggregate rating summary (visuel simple) -->
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div style="font-size:28px;font-weight:700;color:var(--accent);">4.8</div>
+        <div>
+          <div class="muted">Note moyenne — basé sur 124 avis</div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <!-- Example reviews: replace with real customer reviews -->
+        <div class="review">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong>Julie P.</strong><span class="stars">★★★★★</span>
+          </div>
+          <p class="muted" style="margin:8px 0 0;">Les croissants sont incroyables. Service chaleureux — une adresse incontournable.</p>
+        </div>
+        <div class="review">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong>Marc L.</strong><span class="stars">★★★★☆</span>
+          </div>
+          <p class="muted" style="margin:8px 0 0;">Pain de campagne excellent. Un peu d'attente le samedi matin mais ça vaut la peine.</p>
+        </div>
+        <div class="review">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong>Camille R.</strong><span class="stars">★★★★★</span>
+          </div>
+          <p class="muted" style="margin:8px 0 0;">Pâtisseries fraîches et belles — parfait pour anniversaires.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:12px;" class="muted">Vous avez aimé ? <a href="mailto:contact@example.com">Laissez-nous un avis</a><!--<a href="#contact">Laissez-nous un avis</a>--> ou sur Google / Facebook.</p>
+    </section>
+
+      <div class="hero-right">
+        <img src="images/des-croissants-sur-un-plateau-de-chocolats.jpg" alt="Vitrine de boulangerie avec pains et viennoiseries" style="width:100%;border-radius:12px;height:200px;object-fit:cover;">
+      </div>
+      
+       <!-- HORAIRES -->
+    <section id="horaires" aria-labelledby="horaires-title">
+      <div class="section-title"><h2 id="horaires-title">Horaires</h2><span class="muted">Heures d'ouverture</span></div>
+      <table class="hours" aria-describedby="horaires-desc">
+        <tbody>
+          <tr><td>Lundi</td><td>7:00 — 19:00</td></tr>
+          <tr><td>Mardi</td><td>7:00 — 19:00</td></tr>
+          <tr><td>Mercredi</td><td>7:00 — 19:00</td></tr>
+          <tr><td>Jeudi</td><td>7:00 — 19:00</td></tr>
+          <tr><td>Vendredi</td><td>7:00 — 19:00</td></tr>
+          <tr><td>Samedi</td><td>7:00 — 18:00</td></tr>
+          <tr><td>Dimanche</td><td>8:00 — 13:00</td></tr>
+        </tbody>
+      </table>
+      <p id="horaires-desc" class="muted">Fermé les jours fériés — pâtisseries spéciales sur commande.</p>
+    </section>
+    
+    <!-- PHOTOS / GALLERY -->
+    <section id="photos" aria-labelledby="photos-title">
+      <div class="section-title"><h2 id="photos-title">Photos</h2><span class="muted">Nos produits & l'atelier</span></div>
+      <div class="gallery" id="gallery">
+        <!-- Lazy-loaded images: replace URLs with your images -->
+        <img loading="lazy" src="images/Croustade .jpg" alt="Baguettes artisanales fraîches">
+        <img loading="lazy" src="images/Eclair .jpg" alt="Viennoiseries dorées" data-large="https://images.unsplash.com/photo-1547483238-8a4c9e7f7b3e?q=80&w=1600&auto=format&fit=crop">
+        <img loading="lazy" src="images/Croissant .jpg" alt="Pâtisseries maison">
+        <!--<img loading="lazy" src="https://images.unsplash.com/photo-1612874745110-409a98d0e4d8?q=80&w=800&auto=format&fit=crop" alt="Fabrication du pain" data-large="https://images.unsplash.com/photo-1612874745110-409a98d0e4d8?q=80&w=1600&auto=format&fit=crop">-->
+      </div>
+    </section>
+
+    <!-- MENU / SPECIALITES -->
+    <section id="menu" aria-labelledby="menu-title">
+      <div class="section-title"><h2 id="menu-title">Spécialités</h2><span class="muted">Choisissez vos favoris</span></div>
+      <div class="info-row">
+        <div class="card">
+          <h3 style="margin:0 0 6px 0;">Pains</h3>
+          <p class="muted">Baguette tradition, Pain complet, Pain de campagne.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px 0;">Viennoiseries</h3>
+          <p class="muted">Croissants au beurre, Pain au chocolat, Chausson aux pommes.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px 0;">Pâtisseries</h3>
+          <p class="muted">Tarte aux fruits, Éclair au chocolat, Opéra (sur commande).</p>
+        </div>
+      </div>
+      <p style="margin-top:12px;" class="muted">Commandes spéciales et gâteaux sur demande — contactez-nous à <a href="mailto:contact@example.com">contact@example.com</a></p>
+    </section>
+
+      <!-- MAP -->
+    <section id="carte" aria-labelledby="carte-title">
+      <div class="section-title"><h2 id="carte-title">Nous trouver</h2><span class="muted">Plan et itinéraire</span></div>
+      <div class="map" aria-hidden="false">
+        <!-- Replace the src with your Google Maps embed link (or other) -->
+        <iframe title="Plan Boulangerie Maison Janin" src="https://maps.google.com/?cid=1450481393495223662&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ&output=embed" style="width:100%;height:100%;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <!--<div class="section-title"><h2 id="contact-title">Contact</h2>-->
+        <!--<span class="muted">Envoyez-nous un message</span></div>-->
+
+     <!-- <div style="display:grid;grid-template-columns:1fr 320px;gap:12px;">
+        <div>
+          <form class="contact" id="contactForm" action="#" onsubmit="return submitForm(event)" aria-label="Formulaire de contact">
+            <input type="text" id="name" name="name" placeholder="Votre nom *" required>
+            <input type="email" id="email" name="email" placeholder="Votre e-mail *" required>
+            <div class="form-row">
+              <input type="tel" id="phone" name="phone" placeholder="Téléphone (optionnel)">
+              <select id="subject" name="subject" aria-label="Sujet">
+                <option value="commande">Commande</option>
+                <option value="evenement">Gâteau événement</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <textarea id="message" name="message" placeholder="Votre message *" required></textarea>
+            <div style="display:flex;gap:8px;">
+              <button type="submit" class="btn">Envoyer</button>
+              <a class="btn secondary" href="mailto:contact@example.com">Envoyer par e-mail</a>
+            </div>
+            <div id="formStatus" class="muted" aria-live="polite" style="margin-top:8px;"></div>
+          </form>
+        </div>-->
+
+        <aside style="display:flex;flex-direction:column;gap:8px;">
+          <div class="card">
+            <strong>Adresse</strong>
+            <div class="muted">39 Rue Matabiau, 31000 Toulouse</div>
+            <div style="margin-top:8px;"><strong>Téléphone</strong><div class="muted"><a href="tel:+33123456789">01 23 45 67 89</a></div></div>
+            <div style="margin-top:8px;"><strong>Réseaux</strong><div class="muted"><a href="#" aria-label="Facebook">Facebook</a> • <a href="#" aria-label="Instagram">Instagram</a></div></div>
+          </div>
+
+          <!--<div class="card">
+            <strong>Commandes</strong>
+            <p class="muted" style="margin:6px 0 0;">Pour les grosses commandes, passez un appel ou écrivez au moins 48h à l'avance.</p>
+          </div>-->
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Boulangerie Maison Janin — Tous droits réservés — <span class="muted">Site développé avec ❤️</span>
+    </footer>
+  </main>
+
+  <!-- Image modal -->
+  <div class="modal" id="imgModal" role="dialog" aria-hidden="true" aria-label="Agrandissement de l'image">
+    <img id="modalImg" alt="">
+  </div>
+
+  <script>
+    // Basic interactivity: toggle nav, smooth scroll, image modal, contact form stub
+    (function(){
+      const hamburger = document.getElementById('hamburger');
+      const nav = document.getElementById('site-nav');
+      const modal = document.getElementById('imgModal');
+      const modalImg = document.getElementById('modalImg');
+
+      // Toggle nav
+      hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', String(!expanded));
+        if(nav.style.display === 'block'){
+          nav.style.display = 'none';
+          nav.setAttribute('aria-hidden','true');
+        } else {
+          nav.style.display = 'block';
+          nav.setAttribute('aria-hidden','false');
+        }
+      });
+
+      // Close nav when link clicked (helpful on mobile)
+      nav.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          // smooth scroll - native
+          e.preventDefault();
+          const id = a.getAttribute('href');
+          document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+          nav.style.display = 'none';
+          nav.setAttribute('aria-hidden','true');
+          hamburger.setAttribute('aria-expanded','false');
+        });
+      });
+
+      // Gallery modal
+      document.getElementById('gallery').addEventListener('click', (e)=>{
+        const el = e.target.closest('img');
+        if(!el) return;
+        const large = el.dataset.large || el.src;
+        modalImg.src = large;
+        modalImg.alt = el.alt || '';
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden','false');
+      });
+
+      // Close modal on click
+      modal.addEventListener('click', ()=>{
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+        modalImg.src = '';
+      });
+
+      // Contact form (example: you can wire to Netlify, Formspree, or your backend)
+      window.submitForm = function(event){
+        event.preventDefault();
+        const status = document.getElementById('formStatus');
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if(!name || !email || !message){
+          status.textContent = 'Merci de remplir les champs requis.';
+          return false;
+        }
+        // For demo: open mailto as fallback. Replace with AJAX POST to your endpoint.
+        const subject = encodeURIComponent('Contact depuis le site - ' + document.getElementById('subject').value);
+        const body = encodeURIComponent('Nom: '+name+"\nEmail: "+email+"\nTéléphone: "+document.getElementById('phone').value+"\n\n"+message);
+        window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+        status.textContent = 'Votre message est prêt à être envoyé via votre application e-mail.';
+        return false;
+      };
+
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Accessibility: close nav on Escape
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape'){
+          if(nav.style.display === 'block'){ nav.style.display='none'; nav.setAttribute('aria-hidden','true'); hamburger.setAttribute('aria-expanded','false'); }
+          if(modal.style.display === 'flex'){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); modalImg.src=''; }
+        }
+      });
+    })();
+  </script>
+
+  <!-- ===== Structured Data (JSON-LD) for LocalBusiness (Bakery) & Reviews ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Boulangerie Le Pain Doré",
+    "image": [
+      "https://example.com/og-image.jpg",
+      "https://example.com/photo1.jpg"
+    ],
+    "@id": "https://example.com/#boulangerie",
+    "url": "https://example.com/",
+    "telephone": "+33123456789",
+    "priceRange": "€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "12 Rue des Fournils",
+      "addressLocality": "[Ville]",
+      "postalCode": "75000",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 48.858370,
+      "longitude": 2.294481
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens":"07:00", "closes":"19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens":"07:00", "closes":"18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens":"08:00", "closes":"13:00" }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "124"
+    },
+    "review":[
+      {
+        "@type":"Review",
+        "author":"Julie P.",
+        "datePublished":"2025-09-05",
+        "reviewBody":"Les croissants sont incroyables. Service chaleureux — une adresse incontournable.",
+        "reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"}
+      },
+      {
+        "@type":"Review",
+        "author":"Marc L.",
+        "datePublished":"2025-08-20",
+        "reviewBody":"Pain de campagne excellent. Un peu d'attente le samedi matin mais ça vaut la peine.",
+        "reviewRating":{"@type":"Rating","ratingValue":"4","bestRating":"5"}
+      }
+    ]
+  }
+  </script>
+
+  <!-- ===== Instructions pour personnaliser =====
+    - Remplacez tous les "https://example.com/..." et images Unsplash par vos images hébergées.
+    - Adaptez le nom, l'adresse, le téléphone et les horaires.
+    - Pour les formulaires réels : connectez à NetlifyForms, Formspree, ou à votre endpoint (remplacez submitForm).
+    - Pour SEO avancé : mettez à jour les balises OG et la balise canonical.
+    - Vous pouvez ajouter microdata supplémentaires (menu, product, event) selon vos besoins.
+  -->
+</body>
+</html>

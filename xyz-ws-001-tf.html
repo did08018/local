@@ -11,13 +11,12 @@
   <meta name="keywords" content="entreprise, services, produits, Toulouse, professionnel, horaires, contact" />
 
   <!-- Open Graph -->
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Entreprise locale — Toulouse" />
-<meta property="og:description" content="Découvrez nos services et solutions adaptés à vos besoins. Basés à Toulouse, nous vous accueillons avec professionnalisme." />
-<meta property="og:image" content="https://example.com/og-image.jpg" />
-<meta property="og:url" content="https://example.com/" />
-<meta property="og:locale" content="fr_FR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Entreprise locale — Toulouse" />
+  <meta property="og:description" content="Découvrez nos services et solutions adaptés à vos besoins. Basés à Toulouse, nous vous accueillons avec professionnalisme." />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:locale" content="fr_FR" />
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -32,6 +31,7 @@
       --shadow: 0 6px 22px rgba(0,0,0,0.08);
       color-scheme: light;
     }
+    
     html,body{height:100%;}
     body{
       margin:0;
@@ -42,21 +42,20 @@
       line-height:1.5;
     }
 
-/* Top bar + Hamburger */
-.topbar {
-  position: fixed;
-  top: 0; /* colle bien en haut */
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 10px 12px;
-  background: var(--bg); /* fond uni */
-  box-shadow: var(--shadow);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
+   .topbar {
+     position: fixed;
+     top: 0; /* colle bien en haut */
+     left: 0;
+     right: 0;
+     z-index: 1000;
+     display: flex;
+     gap: 12px;
+     align-items: center;
+     padding: 10px 12px;
+     background: var(--bg); /* fond uni */
+     box-shadow: var(--shadow);
+     border-bottom: 1px solid rgba(0,0,0,0.06);
+   }
 
 .hamburger{
   width:44px;height:44px;
@@ -116,7 +115,7 @@
     
     header.hero{
       display:flex;
-      gap:18px;
+      gap:28px;
       align-items:center;
       padding:28px 12px 5px;
       border-radius:12px;
@@ -152,7 +151,7 @@
    }
     
     /* Sections */
-    section{margin-top:28px;padding:22px;border-radius:12px;background:#fff;box-shadow:var(--shadow);}
+    section{margin-top:18px;padding:22px;border-radius:12px;background:#fff;box-shadow:var(--shadow);}
     .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
     .section-title h2{margin:0;font-size:1.1rem;font-weight:700;font-family:'Playfair Display',serif;}
     .muted{color:var(--muted);font-size:0.95rem;}

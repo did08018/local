@@ -19,16 +19,16 @@
       font-family: "Inter", Arial, sans-serif;
       background: var(--bg);
       color: #111;
-      line-height: 1.5;
+      line-height: 1; /* single spacing everywhere */
     }
 
-    /* Bouton retour */
+    /* Bouton retour compact */
     .top-btn {
       display: block;
-      width: 40%; /* un peu plus étroit */
-      margin: 20px auto;
-      padding: 10px 14px;
-      font-size: 1rem;
+      width: 40%;
+      margin: 12px auto;
+      padding: 6px 10px;
+      font-size: 0.95rem;
       font-weight: 600;
       background: #fff;
       color: var(--accent);
@@ -46,25 +46,25 @@
     .top-btn::before {
       content: "⬅︎ ";
       color: var(--arrow);
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
 
-    /* Conteneur */
+    /* Conteneur plus compact */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 10px;
+      padding: 6px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
 
-    /* Carte pricing */
+    /* Cartes pricing compactes */
     .card {
       background: #fff;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 18px 14px;
+      padding: 10px 10px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -73,21 +73,22 @@
     }
 
     .card h2 {
-      font-size: 1.6rem;
-      margin: 0 0 6px 0;
+      font-size: 1.4rem;
+      margin: 0 0 2px 0;
       color: var(--accent);
     }
 
     .card h3 {
-      font-size: 1.1rem;
-      margin: 0 0 10px 0;
+      font-size: 1rem;
+      margin: 0 0 4px 0;
       color: #333;
     }
 
     .card p {
       color: #555;
-      margin: 4px 0;
-      font-size: 0.95rem;
+      margin: 1px 0;
+      font-size: 0.9rem;
+      line-height: 1;
     }
 
     @keyframes slideUp {
@@ -98,11 +99,11 @@
     @media (max-width: 600px) {
       .top-btn {
         width: 70%;
-        font-size: 0.95rem;
-        padding: 8px 12px;
+        font-size: 0.9rem;
+        padding: 5px 8px;
       }
-      .card h2 { font-size: 1.4rem; }
-      .card h3 { font-size: 1rem; }
+      .card h2 { font-size: 1.2rem; }
+      .card h3 { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -120,7 +121,6 @@
       <p>5 photos au choix</p>
       <p>Le site entier vous appartient à vie</p>
       <p>Hébergement compris à vie</p>
-      <p></p>
     </div>
 
     <div class="card">

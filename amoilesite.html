@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pricing Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+    }
+
+    /* Top button */
+    .top-btn {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 20px;
+      background-color: #ff6f61;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .top-btn:hover {
+      background-color: #e5554a;
+    }
+
+    /* Sections */
+    .section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-left: 8px solid;
+      animation: pop 0.6s ease;
+    }
+
+    /* Fun colors for pricing vibe */
+    .section:nth-child(2) { border-color: #ff6f61; }
+    .section:nth-child(3) { border-color: #6a5acd; }
+    .section:nth-child(4) { border-color: #20b2aa; }
+    .section:nth-child(5) { border-color: #ffb347; }
+    .section:nth-child(6) { border-color: #32cd32; }
+
+    .section h2 {
+      margin-top: 0;
+      color: #444;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cute button back to index -->
+  <a href="index.html" class="top-btn">⬅ Back to Home</a>
+
+  <!-- Five sections -->
+  <div class="section">
+    <h2>Section 1 Title</h2>
+    <p>Your first paragraph here about pricing.</p>
+    <p>Another supporting paragraph.</p>
+  </div>
+
+  <div class="section">
+    <h2>Section 2 Title</h2>
+    <p>Your first paragraph here.</p>
+    <p>Another supporting paragraph.</p>
+  </div>
+
+  <div class="section">
+    <h2>Section 3 Title</h2>
+    <p>Your first paragraph here.</p>
+    <p>Another supporting paragraph.</p>
+  </div>
+
+  <div class="section">
+    <h2>Section 4 Title</h2>
+    <p>Your first paragraph here.</p>
+    <p>Another supporting paragraph.</p>
+  </div>
+
+  <div class="section">
+    <h2>Section 5 Title</h2>
+    <p>Your first paragraph here.</p>
+    <p>Another supporting paragraph.</p>
+  </div>
+
+</body>
+</html>

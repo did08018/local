@@ -57,28 +57,32 @@
       line-height: 1;
     }
 
-    /* Conteneur */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px; /* un peu plus d'air */
-    }
+/* Conteneur : une carte par ligne */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* espace vertical entre cartes */
+}
 
-    /* Cartes pricing */
-    .card {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 12px 12px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      animation: slideUp 0.6s ease;
-    }
+/* Carte centrée avec marges latérales */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  animation: slideUp 0.6s ease;
+
+  margin: 0 12px;       /* marge gauche/droite */
+  max-width: 800px;     /* largeur max agréable */
+  align-self: center;   /* centre chaque carte */
+}
 
     .card h2 {
       font-size: 1.4rem;

@@ -337,7 +337,10 @@
           <p class="muted">Prestations adaptées, Solutions personnalisées, Créations exclusives (sur commande).</p>
         </div>
       </div>
-      <p style="margin-top:12px;" class="muted">Contactez-nous à <a href="mailto:contact@example.com">contact@example.com</a> pour plus d’informations.</p>
+      <p style="margin-top:12px;" class="muted">Pour plus d'informations, contactez-nous: <a href="mailto:contact@example.com"<span id="email-text">contact@example.com</a></p>
+              <i class="fa-regular fa-clone" id="copy-icon" style="cursor: pointer; margin-left: 8px;" title="Copy to clipboard"></i>
+              <span id="copied-popup" style="display:none; margin-left: 10px; color: blue; font-size: 0.8rem;">Copié !</span>
+      
     </section>
 
       <!-- MAP -->
@@ -350,31 +353,6 @@
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
-      <!--<div class="section-title"><h2 id="contact-title">Contact</h2>-->
-        <!--<span class="muted">Envoyez-nous un message</span></div>-->
-
-     <!-- <div style="display:grid;grid-template-columns:1fr 320px;gap:12px;">
-        <div>
-          <form class="contact" id="contactForm" action="#" onsubmit="return submitForm(event)" aria-label="Formulaire de contact">
-            <input type="text" id="name" name="name" placeholder="Votre nom *" required>
-            <input type="email" id="email" name="email" placeholder="Votre e-mail *" required>
-            <div class="form-row">
-              <input type="tel" id="phone" name="phone" placeholder="Téléphone (optionnel)">
-              <select id="subject" name="subject" aria-label="Sujet">
-                <option value="commande">Commande</option>
-                <option value="evenement">Gâteau événement</option>
-                <option value="autre">Autre</option>
-              </select>
-            </div>
-            <textarea id="message" name="message" placeholder="Votre message *" required></textarea>
-            <div style="display:flex;gap:8px;">
-              <button type="submit" class="btn">Envoyer</button>
-              <a class="btn secondary" href="mailto:contact@example.com">Envoyer par e-mail</a>
-            </div>
-            <div id="formStatus" class="muted" aria-live="polite" style="margin-top:8px;"></div>
-          </form>
-        </div>-->
-
         <aside style="display:flex;flex-direction:column;gap:8px;">
           <div class="card">
             <strong>Adresse</strong>
@@ -382,11 +360,6 @@
             <div style="margin-top:8px;"><strong>Téléphone</strong><div class="muted"><a href="tel:+33123456789">01 23 45 67 89</a></div></div>
             <div style="margin-top:8px;"><strong>Réseaux</strong><div class="muted"><a href="https://facebook.com" aria-label="Facebook">Facebook</a> • <a href="https://instagram.com" aria-label="Instagram">Instagram</a></div></div>
           </div>
-
-          <!--<div class="card">
-            <strong>Commandes</strong>
-            <p class="muted" style="margin:6px 0 0;">Pour les grosses commandes, passez un appel ou écrivez au moins 48h à l'avance.</p>
-          </div>-->
         </aside>
       </div>
     </section>

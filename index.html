@@ -25,7 +25,7 @@
       --bg:#fff;
       --accent:#d99a3b; /* couleur miel */
       --muted:#6b6b6b;
-      --max-width:1100px;
+      --max-width:700px;
       --radius:10px;
       --shadow: 0 6px 22px rgba(0,0,0,0.08);
       color-scheme: light;
@@ -122,7 +122,7 @@
       background:linear-gradient(180deg,rgba(217,154,59,0.06),rgba(217,154,59,0.02));
     }
     .hero-left{flex:1;min-width:240px;}
-    .hero-right{width:300px;flex-shrink:0;}
+    .hero-right{max-width:350px;flex-shrink:0;}
     .hero h1{margin:0;font-family:'Playfair Display',serif;font-size:2rem;}
     .hero p.lead{color:var(--muted);margin:8px 0 16px;}
     .cta-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -133,18 +133,18 @@
     }
     .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(217,154,59,0.15);box-shadow:none;}
 
-   img {
+   /*img {
      width: 100%;
      height: auto;
      display: block;
      border-radius: 12px;
-   }
+   }*/
 
-   .gallery img {
+   img, .gallery img {
      width: 100%;
      height: auto;
      object-fit: contain;
-     border-radius: 8px;
+     border-radius: 12px;
      cursor: pointer;
      display: block;
    }

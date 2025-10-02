@@ -534,14 +534,23 @@
       }
     ]
   }
-  </script>
 
-  <!-- ===== Instructions pour personnaliser =====
-    - Remplacez tous les "https://example.com/..." et images Unsplash par vos images hébergées.
-    - Adaptez le nom, l'adresse, le téléphone et les horaires.
-    - Pour les formulaires réels : connectez à NetlifyForms, Formspree, ou à votre endpoint (remplacez submitForm).
-    - Pour SEO avancé : mettez à jour les balises OG et la balise canonical.
-    - Vous pouvez ajouter microdata supplémentaires (menu, product, event) selon vos besoins.
-  -->
+// Copy email to clipboard
+const copyIcon = document.getElementById("copy-icon");
+const emailText = document.getElementById("email-text").innerText;
+const copiedPopup = document.getElementById("copied-popup");
+
+copyIcon.addEventListener("click", () => {
+  navigator.clipboard.writeText(emailText).then(() => {
+    copiedPopup.style.display = "inline";   // affiche "Copied!"
+    setTimeout(() => {
+      copiedPopup.style.display = "none";  // le cache après 2s
+    }, 2000);
+  }).catch(err => {
+    console.error("Échec de la copie :", err);
+  });
+});
+    
+  </script>
 </body>
 </html>

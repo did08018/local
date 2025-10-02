@@ -197,6 +197,15 @@
   cursor: default; /* prevents cursor "pointer" on image */
 }
 
+/* Only gallery images should show pointer */
+img.popup-img {
+  cursor: pointer;
+}
+
+/* All other images use default cursor */
+img:not(.popup-img) {
+  cursor: default;
+}
 
 
 

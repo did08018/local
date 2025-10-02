@@ -58,15 +58,15 @@
      border-bottom: 1px solid rgba(0,0,0,0.06);
    }
 
-.hamburger{
-  width:44px;height:44px;
-  display:grid;place-items:center;
-  background:var(--bg); /* il same as page background */
-  border-radius:8px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(0,0,0,0.04);
-  cursor:pointer;
-}
+  .hamburger{
+    width:44px;height:44px;
+    display:grid;place-items:center;
+    background:var(--bg); /* il same as page background */
+    border-radius:8px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(0,0,0,0.04);
+    cursor:pointer;
+  }
 
 .brand .name{
   font-family:'Playfair Display',serif;
@@ -139,13 +139,13 @@
      width: 100%;
      height: auto;
      display: block;
-     border-radius: 12px; /* optional: rounded corners */
+     border-radius: 12px;
    }
 
    .gallery img {
      width: 100%;
      height: auto;
-     object-fit: contain; /* show full image */
+     object-fit: contain;
      border-radius: 8px;
      cursor: pointer;
      display: block;
@@ -189,7 +189,9 @@
 </head>
   
 <body>
-  <!-- ===== Top left hamburger + brand ===== -->
+  
+<!-- ===== Top left hamburger + brand ===== -->
+  
   <div class="topbar" aria-hidden="false">
     <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
       <span class="bars" aria-hidden="true"></span>
@@ -202,7 +204,8 @@
   </div>
  </a>
 
-  <!-- Sidebar / nav -->
+<!-- ===== Sidebar / nav ===== -->
+  
   <nav class="site-nav" id="site-nav" aria-hidden="true">
     <a href="#avis">Avis</a>
     <a href="#horaires">Horaires</a>
@@ -213,7 +216,9 @@
   </nav>
 
   <main class="container" id="top">
-    <!-- HERO -->
+    
+<!-- ===== HERO ===== -->
+    
     <header class="hero" role="banner" aria-label="Présentation">
       <div class="hero-left">
         <!--<h1>Autre Titre</h1>-->
@@ -224,17 +229,21 @@
         <p class="lead">Produits et services de qualité, conçus avec passion et savoir-faire — votre satisfaction au cœur de notre engagement depuis 1907.</p>
         </div>
           <div style="margin-top:12px;" class="muted">
-         <!-- <strong>Tel:</strong> <a href="tel:+33123456789">01 23 45 67 89</a>--> <!-- • --> <strong>Email:</strong> <a href="mailto:contact@example.com">contact@example.com</a>
+            <!-- <strong>Tel:</strong> <a href="tel:+33123456789">01 23 45 67 89</a>--> <!-- • -->
+            <strong>Email:</strong> <a href="mailto:contact@example.com"<span id="email-text">contact@example.com</span></a>
+              <i class="fa-regular fa-clone" id="copy-icon" style="cursor: pointer; margin-left: 8px;" title="Copy to clipboard"></i>
+              <span id="copied-popup" style="display:none; margin-left: 10px; color: green; font-size: 0.9rem;">Copié !</span>
         </div>
-              <div id="contact-email" style="text-align: center; margin-top: 1rem;">
-       Use the form below or send me an email - <span id="email-text">fix@findingdopa.com</span>
+             <!-- <div id="contact-email" style="text-align: center; margin-top: 1rem;">
+        <span id="email-text">fix@findingdopa.com</span>
   <i class="fa-regular fa-clone" id="copy-icon" style="cursor: pointer; margin-left: 8px;" title="Copy to clipboard"></i>
-   <span id="copied-popup" style="display:none; margin-left: 10px; color: green; font-size: 0.9rem;">Copied!</span>
-      </div>
+   <span id="copied-popup" style="display:none; margin-left: 10px; color: green; font-size: 0.9rem;">Copié !</span>
+      </div> -->
       </div>
     </header>
 
-    <!-- REVIEWS -->
+<!-- ===== REVIEWS ===== -->
+    
     <section id="avis" aria-labelledby="avis-title">
       <div class="section-title"><h2 id="avis-title">Avis clients</h2><span class="muted">Ce que disent nos clients</span></div>
 

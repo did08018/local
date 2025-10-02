@@ -133,13 +133,6 @@
     }
     .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(217,154,59,0.15);box-shadow:none;}
 
-   /*img {
-     width: 100%;
-     height: auto;
-     display: block;
-     border-radius: 12px;
-   }*/
-
    img, .gallery img {
      width: 100%;
      height: auto;
@@ -183,6 +176,14 @@
        nav.site-nav{left:12px;right:12px;}
       .hero-right{width:100%;}
     }
+
+    .modal img {
+  max-width: min(95%, 700px); /* never exceed 700px, but also adapt to screen */
+  max-height: 85%;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
   </style>
 </head>
   
@@ -320,9 +321,9 @@
     <section id="photos" aria-labelledby="photos-title">
       <div class="section-title"><h2 id="photos-title">Photos</h2><span class="muted">Nos produits & l'atelier</span></div>
       <div class="gallery" id="gallery">
-        <img loading="lazy" src="images/inside1.jpg" alt="Baguettes artisanales fraîches">
-        <img loading="lazy" src="images/inside2.jpeg" alt="Viennoiseries dorées" data-large="https://images.unsplash.com/photo-1547483238-8a4c9e7f7b3e?q=80&w=1600&auto=format&fit=crop">
-        <img loading="lazy" src="images/inside3.jpg" alt="Pâtisseries maison">
+        <img loading="lazy" src="images/inside1.jpg" alt="inside 1" class="popup-img">
+        <img loading="lazy" src="images/inside2.jpeg" alt="inside 2" class="popup-img">
+        <img loading="lazy" src="images/inside3.jpg" alt="inside 3" class="popup-img">
       </div>
     </section>
 
@@ -415,23 +416,27 @@
         });
       });
 
-      // Gallery modal
-      document.getElementById('gallery').addEventListener('click', (e)=>{
-        const el = e.target.closest('img');
-        if(!el) return;
-        const large = el.dataset.large || el.src;
-        modalImg.src = large;
-        modalImg.alt = el.alt || '';
-        modal.style.display = 'flex';
-        modal.setAttribute('aria-hidden','false');
-      });
+// Popup images (hero + gallery)
+document.querySelectorAll('.popup-img').forEach(img => {
+  img.addEventListener('click', () => {
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImg');
+    modalImg.src = img.dataset.large || img.src;
+    modalImg.alt = img.alt || '';
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden','false');
+  });
+});
 
-      // Close modal on click
-      modal.addEventListener('click', ()=>{
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden','true');
-        modalImg.src = '';
-      });
+// Close modal on click
+document.getElementById('imgModal').addEventListener('click', () => {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden','true');
+  modalImg.src = '';
+});
+
 
       // Contact form (example: you can wire to Netlify, Formspree, or your backend)
       window.submitForm = function(event){
@@ -466,6 +471,7 @@
   </script>
 
   <!-- ===== Structured Data (JSON-LD) for LocalBusiness (Bakery) & Reviews ===== -->
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -536,5 +542,9 @@ copyIcon.addEventListener("click", () => {
   });
 });
   </script>
+  <div class="modal" id="imgModal" aria-hidden="true">
+  <img id="modalImg" alt="">
+</div>
+
 </body>
 </html>

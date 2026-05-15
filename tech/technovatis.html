@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technovatis — Ingénierie d'automatisation industrielle</title>
+<meta name="description" content="Conception, prototypage et mise en service de cellules robotisées sur mesure. Tri et clippage breveté, vision IA. Wavrin, France.">
+<link rel="icon" type="image/png" href="technovatis_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:        #F2EEE3;
+  --paper-2:      #E9E3D2;
+  --ink:          #0F1A2C;
+  --ink-2:        #2A3344;
+  --muted:        #6E7484;
+  --accent:       #0E8FC9;
+  --accent-deep:  #0A6FA0;
+  --line:         rgba(15, 26, 44, 0.14);
+  --line-soft:    rgba(15, 26, 44, 0.07);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.45;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+}
+::selection { background: var(--accent); color: #fff; }
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+/* ============ TOP BAR ============ */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(242, 238, 227, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.top-bar-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  height: 60px;
+  padding: 0 32px;
+  gap: 32px;
+}
+.brand { display: inline-flex; align-items: center; height: 36px; text-decoration: none; }
+.brand img { height: 22px; width: auto; display: block; }
+.nav-links {
+  display: flex; gap: 32px; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.tel-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  transition: border-color .2s, color .2s;
+}
+.tel-link:hover { border-color: var(--accent); color: var(--accent); }
+.lang-switch {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-transform: uppercase;
+  transition: border-color .2s;
+}
+.lang-switch:hover { border-color: var(--ink); }
+.lang-switch .on { color: var(--accent); }
+.lang-en .lang-switch .on { color: var(--ink-2); }
+.lang-en .lang-switch .off { color: var(--accent); }
+
+/* ============ HERO ============ */
+.hero {
+  padding: 120px 32px 64px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::after {
+  content: ''; flex: 1;
+  border-top: 1px solid var(--line);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: start;  /* photo and text sit at their own heights */
+}
+h1.hero-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+h1.hero-title .hl { color: var(--accent); }
+.hero-sub {
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin-bottom: 36px;
+}
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.hero-image-wrap {
+  position: relative;
+  background: var(--paper-2);
+}
+.hero-image-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;  /* NATURAL aspect — no crop */
+}
+.photo-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--paper);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 9px;
+  color: var(--ink-2);
+  z-index: 2;
+}
+.photo-tag.bottom { top: auto; bottom: 12px; }
+
+/* Inline spec row */
+.spec-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  margin-top: 56px;
+}
+.spec-row .item {
+  padding: 18px 24px 18px 0;
+  border-right: 1px solid var(--line-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.spec-row .item:last-child { border-right: none; padding-right: 0; }
+.spec-row .item .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.spec-row .item .val {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* ============ BUTTONS ============ */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 22px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  transition: background .2s, border-color .2s;
+}
+.btn-cta .arrow { display: inline-block; transition: transform .25s; }
+.btn-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+.btn-cta:hover .arrow { transform: translateX(4px); }
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--ink);
+  transition: color .2s, border-color .2s;
+}
+.btn-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ============ SECTION ============ */
+section.block {
+  padding: 80px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.sec-head {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  align-items: baseline;
+  margin-bottom: 48px;
+  border-top: 1px solid var(--ink);
+  padding-top: 24px;
+}
+.sec-head .ref {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.sec-head h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(26px, 3.4vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 24ch;
+}
+.sec-head h2 .hl { color: var(--accent); }
+
+/* ============ FACILITIES ============ */
+.facilities {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;  /* no crop / no stretch */
+}
+.facilities-left { display: flex; flex-direction: column; gap: 32px; }
+.fac-stat {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.fac-stat .stat-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 300;
+  font-size: clamp(76px, 10.5vw, 144px);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+.fac-stat .stat-num sup {
+  font-size: 0.24em;
+  vertical-align: top;
+  margin-left: 8px;
+  font-weight: 500;
+  color: var(--accent);
+}
+.fac-stat .stat-caption {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.fac-stat .stat-caption b { color: var(--ink); font-weight: 600; }
+.fac-copy p {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 0;
+  max-width: 50ch;
+}
+
+/* Spec list (tabular) */
+.spec-list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.spec-list li {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.spec-list li .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--accent);
+}
+.spec-list li .v {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.facilities-photo {
+  position: relative;
+  background: var(--paper-2);
+}
+.facilities-photo img {
+  display: block;
+  width: 100%;
+  height: auto;  /* NATURAL */
+}
+
+/* Gallery — uniform boxes, letterbox into paper, never crops */
+.gallery {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.g-item {
+  position: relative;
+  background: var(--paper-2);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.g-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* no crop — letterbox blends into paper-2 */
+  transition: opacity .3s;
+}
+.g-item:hover img { opacity: 0.96; }
+
+/* ============ EXPERTISE ============ */
+.expertise-wrap { background: var(--paper-2); }
+.expertise-wrap .sec-head { border-top-color: var(--ink); }
+.expertise-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.exp-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color .25s, transform .25s;
+}
+.exp-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.exp-card .exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.exp-card .exp-id {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+.exp-card .exp-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.exp-card h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.exp-card p {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.exp-specs {
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.exp-specs .row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.exp-specs .row .k { color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.exp-specs .row .v { color: var(--ink); font-weight: 500; }
+
+/* ============ CONTACT + MAP ============ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: stretch;
+  min-height: 460px;
+}
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+.contact-left h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.contact-left h3 .hl { color: var(--accent); }
+.contact-left .blurb {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 24px;
+  max-width: 44ch;
+}
+.contact-details {
+  border-top: 1px solid var(--line);
+}
+.contact-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+  font-size: 14px;
+}
+.contact-row .k {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.contact-row .v { color: var(--ink); line-height: 1.5; }
+.contact-row .v a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); transition: color .2s, border-color .2s; }
+.contact-row .v a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.map-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  min-height: 460px;
+}
+.map-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.45) saturate(0.85) contrast(1.02);
+}
+.map-overlay {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--paper);
+  padding: 8px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.map-overlay::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+footer .mark { display: inline-flex; align-items: center; gap: 10px; }
+footer .mark img { height: 16px; width: auto; opacity: 0.55; }
+
+/* ============ LANG ============ */
+[data-en] { display: none; }
+.lang-en [data-fr] { display: none; }
+.lang-en [data-en] { display: initial; }
+
+/* ============ REVEAL ============ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.d2 { transition-delay: .08s; }
+.reveal.d3 { transition-delay: .16s; }
+.reveal.d4 { transition-delay: .24s; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 980px) {
+  .top-bar-inner { grid-template-columns: auto 1fr auto; gap: 12px; padding: 0 18px; }
+  .nav-links, .tel-link { display: none; }
+  .brand img { height: 20px; }
+
+  .hero { padding: 96px 18px 48px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-image-wrap { order: -1; }
+  .hero-actions { gap: 12px 20px; }
+  .spec-row { grid-template-columns: 1fr 1fr; }
+  .spec-row .item { padding: 14px 16px 14px 0; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .spec-row .item:nth-child(2n) { border-right: none; }
+  .spec-row .item:nth-last-child(-n+2) { border-bottom: none; }
+
+  section.block, .expertise-inner { padding: 56px 18px; }
+  .sec-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px; }
+  .facilities { grid-template-columns: 1fr; gap: 32px; }
+  .gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .expertise-grid { grid-template-columns: 1fr; gap: 12px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; min-height: auto; }
+  .map-wrap { min-height: 320px; }
+  footer { padding: 18px; gap: 8px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="#home" class="brand" aria-label="Technovatis">
+      <img src="technovatis_logo.png" alt="Technovatis">
+    </a>
+    <nav class="nav-links">
+      <a href="#facilities">01 · <span data-fr>Installations</span><span data-en>Facilities</span></a>
+      <a href="#expertise">02 · <span data-fr>Expertise</span><span data-en>Expertise</span></a>
+      <a href="#contact">03 · Contact</a>
+    </nav>
+    <a href="tel:+33320502785" class="tel-link">+33 3 20 50 27 85</a>
+    <button class="lang-switch" onclick="toggleLang()" aria-label="Toggle language">
+      <span class="on">FR</span> / <span class="off">EN</span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow reveal in">
+    <span class="mono"><span data-fr>Ingénierie · Automatisation industrielle</span><span data-en>Engineering · Industrial automation</span></span>
+  </div>
+
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title reveal in d2">
+        <span data-fr>L'ingénierie qui tient vos <span class="hl">cadences</span>.</span>
+        <span data-en>Engineering that holds your <span class="hl">throughput</span>.</span>
+      </h1>
+
+      <p class="hero-sub reveal in d3" data-fr>Conception, prototypage et mise en service de cellules robotisées sur mesure — tri et clippage breveté, vision IA, contrôle qualité automatisé. Pour la plasturgie, l'automobile et la sous-traitance industrielle.</p>
+      <p class="hero-sub reveal in d3" data-en>Design, prototyping and commissioning of custom robotic cells — patented sort and clip, AI vision, automated quality control. For plastics, automotive and industrial subcontracting.</p>
+
+      <div class="hero-actions reveal in d4">
+        <a href="#contact" class="btn-cta">
+          <span data-fr>Nous contacter</span><span data-en>Contact us</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#facilities" class="btn-link">
+          <span data-fr>Installations &amp; expertise</span><span data-en>Facilities &amp; expertise</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap reveal in d2">
+      <img src="1772208678840.jpeg" alt="Cellule robotisée Technovatis">
+    </div>
+  </div>
+
+  <div class="spec-row reveal">
+    <div class="item">
+      <span class="label"><span data-fr>Secteurs</span><span data-en>Sectors</span></span>
+      <span class="val"><span data-fr>Plasturgie · Automobile · Sous-traitance</span><span data-en>Plastics · Automotive · Subcontracting</span></span>
+    </div>
+    <div class="item">
+      <span class="label"><span data-fr>Production</span><span data-en>Production</span></span>
+      <span class="val"><span data-fr>Études · Prototypes · Séries</span><span data-en>Studies · Prototypes · Series</span></span>
+    </div>
+    <div class="item">
+      <span class="label">Site</span>
+      <span class="val"><span data-fr>Wavrin, FR-59136 · 290 m² récents</span><span data-en>Wavrin, FR-59136 · 290 m² recent</span></span>
+    </div>
+    <div class="item">
+      <span class="label"><span data-fr>Faisabilité</span><span data-en>Feasibility</span></span>
+      <span class="val">72 h <span data-fr>après brief</span><span data-en>from brief</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FACILITIES ============ -->
+<section class="block" id="facilities">
+  <div class="sec-head reveal">
+    <span class="ref">01 / <span data-fr>Installations</span><span data-en>Facilities</span></span>
+    <h2>
+      <span data-fr>Une capacité projet <span class="hl">renforcée</span>.</span>
+      <span data-en>Project capacity, <span class="hl">expanded</span>.</span>
+    </h2>
+  </div>
+
+  <div class="facilities">
+    <div class="facilities-left">
+      <div class="fac-stat reveal">
+        <div class="stat-num">290<sup>m²</sup></div>
+        <div class="stat-caption">
+          <b><span data-fr>Surface ajoutée — extension récente</span><span data-en>Floor area added — recent extension</span></b>
+        </div>
+      </div>
+
+      <div class="fac-copy reveal d2">
+        <p data-fr>Études en parallèle, prototypage rapide, mise au point sans goulot d'étranglement. L'extension dimensionne le site pour absorber des programmes plus complexes — du brief à la livraison.</p>
+        <p data-en>Parallel studies, rapid prototyping, bottleneck-free commissioning. The extension scales the site to absorb more complex programs — from brief to delivery.</p>
+      </div>
+
+      <ul class="spec-list reveal d3">
+        <li>
+          <span class="num">01</span>
+          <span><span data-fr>Soudure et stockage</span><span data-en>Welding and storage</span></span>
+          <span class="v"><span data-fr>Extension 290 m²</span><span data-en>290 m² extension</span></span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <span><span data-fr>Montage et mise au point</span><span data-en>Assembly and commissioning</span></span>
+          <span class="v"><span data-fr>Surface étendue</span><span data-en>Extended</span></span>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <span><span data-fr>Prototype et impression 3D</span><span data-en>Prototype and 3D-printing</span></span>
+          <span class="v"><span data-fr>Salle dédiée</span><span data-en>Dedicated room</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="facilities-photo reveal d2">
+      <img src="1772634521522.jpeg" alt="">
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="g-item reveal">
+      <img src="1772634521576.jpeg" alt="">
+    </div>
+    <div class="g-item reveal d2">
+      <img src="1772634521620.jpeg" alt="">
+    </div>
+    <div class="g-item reveal d3">
+      <img src="1772634521412.jpeg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERTISE ============ -->
+<section class="expertise-wrap">
+  <div class="expertise-inner" id="expertise">
+    <div class="sec-head reveal">
+      <span class="ref">02 / <span data-fr>Expertise</span><span data-en>Expertise</span></span>
+      <h2>
+        <span data-fr>Trois axes <span class="hl">techniques</span>.</span>
+        <span data-en>Three technical <span class="hl">verticals</span>.</span>
+      </h2>
+    </div>
+
+    <div class="expertise-grid">
+
+      <article class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-id">E.01</span>
+          <span class="exp-status"><span data-fr>Brevet déposé</span><span data-en>Patent granted</span></span>
+        </div>
+        <h3><span data-fr>Tri et clippage automatisé</span><span data-en>Automated sort and clip</span></h3>
+        <p data-fr>Orientation fiable et alimentation stable de clips plastiques. Sans réglage manuel, sans dérive en série.</p>
+        <p data-en>Reliable orientation and stable feeding of plastic clips. No manual adjustment, no drift in production.</p>
+        <div class="exp-specs">
+          <div class="row"><span class="k"><span data-fr>Type</span><span data-en>Type</span></span><span class="v"><span data-fr>Bols vibrants · convoyeurs</span><span data-en>Vibratory bowls · conveyors</span></span></div>
+          <div class="row"><span class="k"><span data-fr>Cible</span><span data-en>Target</span></span><span class="v"><span data-fr>Clips, fixations plastiques</span><span data-en>Plastic clips, fasteners</span></span></div>
+          <div class="row"><span class="k">Statut</span><span class="v"><span data-fr>Breveté · en production</span><span data-en>Patented · in production</span></span></div>
+        </div>
+      </article>
+
+      <article class="exp-card reveal d2">
+        <div class="exp-head">
+          <span class="exp-id">E.02</span>
+          <span class="exp-status"><span data-fr>Robotique</span><span data-en>Robotics</span></span>
+        </div>
+        <h3><span data-fr>Assemblage haute cadence</span><span data-en>High-speed assembly</span></h3>
+        <p data-fr>Cellules robotisées pensées pour les contraintes réelles de la production série. Conception sur mesure, intégration site client.</p>
+        <p data-en>Robotic cells engineered for the real constraints of serial production. Bespoke design, on-site integration.</p>
+        <div class="exp-specs">
+          <div class="row"><span class="k"><span data-fr>Architecture</span><span data-en>Architecture</span></span><span class="v"><span data-fr>Robots 6 axes · SCARA</span><span data-en>6-axis · SCARA robots</span></span></div>
+          <div class="row"><span class="k"><span data-fr>Cible</span><span data-en>Target</span></span><span class="v"><span data-fr>Cadences série</span><span data-en>Production-grade</span></span></div>
+          <div class="row"><span class="k">Format</span><span class="v"><span data-fr>Sur mesure</span><span data-en>Bespoke</span></span></div>
+        </div>
+      </article>
+
+      <article class="exp-card reveal d3">
+        <div class="exp-head">
+          <span class="exp-id">E.03</span>
+          <span class="exp-status">Vision · IA</span>
+        </div>
+        <h3><span data-fr>Contrôle qualité par vision</span><span data-en>Vision-based quality control</span></h3>
+        <p data-fr>Portiques de vision équipés d'algorithmes IA pour la détection de défauts. Contrôle automatisé, sans angle mort.</p>
+        <p data-en>Vision gantries running AI defect-detection algorithms. Automated control, no blind spots.</p>
+        <div class="exp-specs">
+          <div class="row"><span class="k"><span data-fr>Capteurs</span><span data-en>Sensors</span></span><span class="v"><span data-fr>Multi-caméras</span><span data-en>Multi-camera</span></span></div>
+          <div class="row"><span class="k"><span data-fr>Logique</span><span data-en>Logic</span></span><span class="v"><span data-fr>Détection défauts IA</span><span data-en>AI defect detection</span></span></div>
+          <div class="row"><span class="k">Action</span><span class="v"><span data-fr>Tri / rejet automatique</span><span data-en>Auto sort / reject</span></span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT + MAP ============ -->
+<section class="block" id="contact">
+  <div class="sec-head reveal">
+    <span class="ref">03 / Contact</span>
+    <h2>
+      <span data-fr>Parlons de votre <span class="hl">projet</span>.</span>
+      <span data-en>Let's talk about your <span class="hl">project</span>.</span>
+    </h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div>
+        <h3>
+          <span data-fr>Retour de faisabilité sous <span class="hl">72 heures</span>.</span>
+          <span data-en>Feasibility feedback within <span class="hl">72 hours</span>.</span>
+        </h3>
+        <p class="blurb" data-fr>Pièce, cadences cibles, environnement, contraintes d'intégration. Nous revenons avec une lecture technique et les premières pistes de cellule.</p>
+        <p class="blurb" data-en>Part, target throughput, environment, integration constraints. We come back with a technical read and initial cell directions.</p>
+        <a href="mailto:contact@technovatis.com" class="btn-cta">
+          <span data-fr>Nous contacter</span><span data-en>Contact us</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="contact-details">
+        <div class="contact-row">
+          <span class="k">Email</span>
+          <span class="v"><a href="mailto:contact@technovatis.com">contact@technovatis.com</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="k"><span data-fr>Téléphone</span><span data-en>Phone</span></span>
+          <span class="v"><a href="tel:+33320502785">+33 3 20 50 27 85</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="k"><span data-fr>Adresse</span><span data-en>Address</span></span>
+          <span class="v">8 Allée de la Clairière<br>59136 Wavrin · France</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-wrap reveal d2">
+      <iframe
+        src="https://maps.google.com/maps?q=8%20All%C3%A9e%20de%20la%20Clairi%C3%A8re%2C%2059136%20Wavrin%2C%20France&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Technovatis — Wavrin, France"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <span class="mark">
+    <img src="technovatis_logo.png" alt="">
+    &copy; 2026 Technovatis
+  </span>
+  <span><span data-fr>Ingénierie d'automatisation industrielle · Wavrin, France</span><span data-en>Industrial automation engineering · Wavrin, France</span></span>
+</footer>
+
+<script>
+  function toggleLang() {
+    document.body.classList.toggle('lang-en');
+    const isEn = document.body.classList.contains('lang-en');
+    document.documentElement.lang = isEn ? 'en' : 'fr';
+    try { localStorage.setItem('pref-lang', isEn ? 'en' : 'fr'); } catch (e) {}
+  }
+  try {
+    if (localStorage.getItem('pref-lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.documentElement.lang = 'en';
+    }
+  } catch (e) {}
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => { if (!el.classList.contains('in')) io.observe(el); });
+</script>
+
+</body>
+</html>
